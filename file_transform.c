@@ -66,7 +66,7 @@ char	**split_array(char *array)
 	while (array[i])
 	{
 		tab[j][k] = array[i];
-		if (i == 20 || i == 40 || i == 60)// Toujours nul a chier
+		if (i == 20 || i == 40 || i == 60)// Toujours nul a chier, modulo ?
 		{
 			j++;
 			i++;
