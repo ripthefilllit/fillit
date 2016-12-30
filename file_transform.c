@@ -60,7 +60,7 @@ char	**split_array(char *array)
 	i = 0;
 	j = 0;
 	k = 0;
-	calc_char = ft_strlen(array) / s20;
+	calc_char = ft_strlen(array) / 20;
 	printf("%d : le nb de tetrimino", calc_char);
 	//MALLOC PLS
 	while (array[i])

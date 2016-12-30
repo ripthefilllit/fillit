@@ -31,5 +31,4 @@ int		main(int argc, char **argv)
 	// Resolution
 	return (0);
 }
-
 // Ajouter la lib putchar strlen putstr putstrfd needed
