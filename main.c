@@ -6,9 +6,11 @@
 /*   By: bzmuda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 10:06:18 by bzmuda            #+#    #+#             */
-/*   Updated: 2016/12/30 13:39:12 by bzmuda           ###   ########.fr       */
+/*   Updated: 2016/12/30 17:40:43 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "fillit.h"
 
 int		main(int argc, char **argv)
 {
@@ -17,7 +19,7 @@ int		main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		ft_putstr("usage: ./fillit source_file");
+		ft_putstr_fd("usage: fillit file", 2);
 		return (0);
 	}
 	lol = file_to_array(argv[1]);

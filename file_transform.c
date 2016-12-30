@@ -6,9 +6,11 @@
 /*   By: bzmuda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 09:41:18 by bzmuda            #+#    #+#             */
-/*   Updated: 2016/12/30 10:17:04 by bzmuda           ###   ########.fr       */
+/*   Updated: 2016/12/30 17:44:15 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "fillit.h"
 
 /*char	**split_array(char *array) // A refaire
 {
