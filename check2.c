@@ -36,7 +36,7 @@ int 	verif_line(char *s)
 }
 
 int		collect_char(char *s) // Fait l'inventaire des . # et \n
-{							// Un tetrimino est bon si 4 # 12 . et 4 \n
+{// Un tetrimino est bon si 4 # 12 . et 4 \n
 	int i;
 	int hashtag;
 	int point;

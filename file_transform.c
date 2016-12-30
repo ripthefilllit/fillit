@@ -47,8 +47,8 @@
 		j++;
 	}
 	return (tab);
-	}*/
-
+	}
+*/
 char	**split_array(char *array)
 {
 	int		calc_char;
@@ -60,15 +60,14 @@ char	**split_array(char *array)
 	i = 0;
 	j = 0;
 	k = 0;
-	calc_char = ft_strlen(array)/20;
+	calc_char = ft_strlen(array) / s20;
 	printf("%d : le nb de tetrimino", calc_char);
 	//MALLOC PLS
 	while (array[i])
 	{
 		tab[j][k] = array[i];
-		if (i == 20 || i == 40 || i == 60) // Toujours nul a chier
+		if (i == 20 || i == 40 || i == 60)// Toujours nul a chier
 		{
-			ft_putstr(tab[j]);
 			j++;
 			i++;
 			k = 0;
