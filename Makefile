@@ -19,7 +19,7 @@ NAME = fillit
 SOURCES = check1.c						\
 					check2.c						\
 					file_transform.c		\
-					main.c
+					main.c \
 OBJECTS = $(SOURCES:.c=.o)
 HEADERS = $(NAME).h
 

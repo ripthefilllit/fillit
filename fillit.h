@@ -22,6 +22,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <string.h>
+# include "libft.h"
 
 int		check_file(char **tab);
 int		verif_body(char *s);
