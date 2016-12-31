@@ -6,7 +6,7 @@
 /*   By: bzmuda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 10:06:18 by bzmuda            #+#    #+#             */
-/*   Updated: 2016/12/30 17:40:43 by bwaegene         ###   ########.fr       */
+/*   Updated: 2016/12/31 11:07:36 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		ft_putstr_fd("usage: fillit file", 2);
+		ft_putstr_fd("usage: fillit file\n", 2);
 		return (0);
 	}
 	lol = file_to_array(argv[1]);
