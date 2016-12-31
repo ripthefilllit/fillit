@@ -71,6 +71,7 @@ int		detective_alone(char *s) // Détecte si tout les # sont liés
 	int valid_hashtag;
 	int ok;
 
+	valid_hashtag = 0;
 	i = 0;
 	ok = 0;
 	while (s[i] != '\0')

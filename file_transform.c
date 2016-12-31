@@ -65,6 +65,8 @@ char	**split_array(char *array)
 	calc_char = ft_strlen(array) / 20;
 	printf("%d : le nb de tetrimino", calc_char);
 	//MALLOC PLS
+	if (!(tab = (char **)malloc(calc_char * sizeof(char *))))
+		return (NULL);
 	while (array[i])
 	{
 		tab[j][k] = array[i];
