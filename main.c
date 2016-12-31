@@ -24,11 +24,11 @@ int		main(int argc, char **argv)
 	}
 	lol = file_to_array(argv[1]);
 	zen = split_array(lol);
-	if (!check_file(zen))
+	/*if (!check_file(zen))
 	{
 		ft_putstr_fd("error\n", 2);
 		return (0);
-	}
+	}*/
 	// Stocker every tetriminos dans une linked list ?
 	// Resolution
 	return (0);

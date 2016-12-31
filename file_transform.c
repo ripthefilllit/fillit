@@ -57,27 +57,37 @@ char	**split_array(char *array)
 	char	**tab;
 	int		i;
 	int		j;
-	int		k;
+	int aff = 0;
+	int k;
+	int cpt;
 
+	// collect 20
+	// +22
+	cpt = 1;
 	i = 0;
 	j = 0;
 	k = 0;
 	calc_char = ft_strlen(array) / 20;
-	printf("%d : le nb de tetrimino", calc_char);
-	//MALLOC PLS
-	if (!(tab = (char **)malloc(calc_char * sizeof(char *))))
+	ft_putstr("\n le nb de tetrimino : \n");
+	ft_putnbr(calc_char);
+	ft_putchar('\n');
+	if (!(tab = (char **)malloc(calc_char * (sizeof(char *)))))
 		return (NULL);
-	while (array[i])
+	while (array[i] != '\0')
 	{
-		tab[j][k] = array[i];
-		if (i == 20 || i == 40 || i == 60)// Toujours nul a chier, modulo ?
+		if (!(tab[j] = (char *)malloc(21 * (sizeof(char)))))
+			return (NULL);
+		while (array[i] != '\0' && i < 20 * cpt)
 		{
-			j++;
+			tab[j][k] = array[i];
+			k++;
 			i++;
-			k = 0;
 		}
-		k++;
-		i++;
+		tab[j][k] = '\0';
+		j++;
+		cpt++;
+		i+=2;
+		k = 0;
 	}
 	return (tab);
 }
@@ -90,6 +100,8 @@ char	*file_to_array(char *file)
 	char	*array;
 	int		i;
 
+	if (!(array = (char *)malloc(ft_strlen(file) * sizeof(char))))
+		return (NULL);
 	i = 0;
 	lec = 0;
 	op = open(file, O_RDONLY);
