@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bwaegene <brice.wge@gmail.com>             +#+  +:+       +#+         #
+#    By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/18 09:48:23 by bwaegene          #+#    #+#              #
-#    Updated: 2017/01/02 15:17:03 by bwaegene         ###   ########.fr        #
+#    Updated: 2017/01/02 17:42:51 by bwaegene         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -31,19 +31,20 @@ SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 HEADERS = include/$(NAME).h
 
+
+DEBUG ?= 0
+ifeq ($(DEBUG), 1)
+    CFLAGS += -g
+endif
+
 all: compile
 
-$(NAME): $(OBJ) libft/libft.a
+$(NAME): $(OBJ) $(HEADERS) libft/libft.a
 	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) -o $(NAME) $(OBJ)
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
 	$(CC) $(CFLAGS) -c $< $(CPPFLAGS) -o $@
-
-debug: $(NAME)-debug
-
-$(NAME)-debug : $(SRC) $(HEADERS)
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(CDEBUG) $(LDFLAGS) $(LDLIBS) -o $(NAME)-debug $(OBJ)
 
 compile: libft
 	make $(NAME)
