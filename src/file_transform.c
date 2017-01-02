@@ -37,7 +37,6 @@ char	**split_array(char *array)
 {
 	int		calc_char;
 	char	**tab;
-	int		i;
 	int		j;
 	int pos;
 

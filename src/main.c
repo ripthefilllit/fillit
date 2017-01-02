@@ -16,7 +16,6 @@ int		main(int argc, char **argv)
 {
 	char *lol;
 	char **zen;
-	int i = 0;
 
 	if (argc != 2)
 	{
