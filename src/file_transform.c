@@ -6,7 +6,7 @@
 /*   By: bzmuda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 09:41:18 by bzmuda            #+#    #+#             */
-/*   Updated: 2017/01/02 11:28:28 by bwaegene         ###   ########.fr       */
+/*   Updated: 2017/01/02 16:48:45 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ char	*file_to_array(char *file)
 	array = "";
 	lec = 0;
 	op = open(file, O_RDONLY);
+	if (op < 0)
+		return (NULL);
 	lec = read(op, buf, BUF_SIZE);
 	if (op == -1)
 	{
