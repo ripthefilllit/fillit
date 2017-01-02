@@ -16,6 +16,7 @@ int		main(int argc, char **argv)
 {
 	char *lol;
 	char **zen;
+	int i = 0;
 
 	if (argc != 2)
 	{
@@ -31,6 +32,6 @@ int		main(int argc, char **argv)
 	}*/
 	// Stocker every tetriminos dans une linked list ?
 	// Resolution
-	return (0);
+	 
 }
 // Ajouter la lib putchar strlen putstr putstrfd needed

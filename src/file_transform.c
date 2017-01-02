@@ -12,82 +12,49 @@
 
 #include "fillit.h"
 
-/*char	**split_array(char *array) // A refaire
+char 	*make_array(char *array, int pos)
 {
-	int i;
-	char **tab;
-	int calc_char;
-	int j;
-	int k;
+	int 	j;
+	char 	*john;
+	int foll;
 
+	foll = pos;
 	j = 0;
-	k = 0;
-	calc_char = ft_strlen(array)/20;
-	printf("%d", calc_char);
-	i = 0;
-	if (!(tab = (char **)malloc(sizeof(char*) * calc_char)))
-		return (NULL);
-	while (array[i])
-	{
-		if (!(tab[j] = (char *)malloc(sizeof(char) * 20)))
+	pos = pos + 20;
+	if (!(john = (char *)malloc(21 * (sizeof(char)))))
 			return (NULL);
-
-		tab[j][k] = array[i];
-		if (i == 20 || i == 40 || i == 60) // Nul a chier
-		{
-			ft_putstr(tab[j]);
-			j++;
-			i+=2;
-		}
-		k++;
-		i++;
-	}
-	while (tab[j] != NULL)
+	while (foll < pos)
 	{
-		ft_putchar(j);
-		ft_putstr(tab[j]);
+		john[j] = array[foll];
+		foll++;
 		j++;
 	}
-	return (tab);
-	}
-*/
+	john[j] = '\0';
+	return (john);
+}
+
 char	**split_array(char *array)
 {
 	int		calc_char;
 	char	**tab;
 	int		i;
 	int		j;
-	/* int aff = 0; */
-	int k;
-	int cpt;
+	int pos;
 
-	// collect 20
-	// +22
-	cpt = 1;
-	i = 0;
+	pos = 0;
 	j = 0;
-	k = 0;
 	calc_char = ft_strlen(array) / 20;
-	ft_putstr("\n le nb de tetrimino : \n");
-	ft_putnbr(calc_char);
-	ft_putchar('\n');
 	if (!(tab = (char **)malloc(calc_char * (sizeof(char *)))))
 		return (NULL);
-	while (array[i] != '\0')
+	while (calc_char)
 	{
-		if (!(tab[j] = (char *)malloc(21 * (sizeof(char)))))
-			return (NULL);
-		while (array[i] != '\0' && i < 20 * cpt)
-		{
-			tab[j][k] = array[i];
-			k++;
-			i++;
-		}
-		tab[j][k] = '\0';
+		tab[j] = make_array(array, pos);
 		j++;
-		cpt++;
-		i+=2;
-		k = 0;
+		calc_char--;
+		if (array[pos + 21])
+			pos = pos + 21;
+		else
+			return (tab);
 	}
 	return (tab);
 }
@@ -98,20 +65,17 @@ char	*file_to_array(char *file)
 	int		lec;
 	char	buf[BUF_SIZE];
 	char	*array;
-	int		i;
 
-	if (!(array = (char *)malloc(ft_strlen(file) * sizeof(char))))
-		return (NULL);
-	i = 0;
+	array = "";
 	lec = 0;
 	op = open(file, O_RDONLY);
+	lec = read(op, buf, BUF_SIZE);
 	if (op == -1)
 	{
 		close(op);
 		return (NULL);
 	}
-	lec = read(op, buf, BUF_SIZE);
-	array = buf;
+	array = ft_strjoin(array,buf);
 	close(op);
 	return (array);
 }
