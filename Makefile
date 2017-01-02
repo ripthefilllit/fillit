@@ -6,7 +6,7 @@
 #    By: bwaegene <brice.wge@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/18 09:48:23 by bwaegene          #+#    #+#              #
-#    Updated: 2017/01/02 13:52:31 by bwaegene         ###   ########.fr        #
+#    Updated: 2017/01/02 15:17:03 by bwaegene         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -14,31 +14,36 @@
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-COPT = -I ./ -I ./libft
+CPPFLAGS = -Iinclude -Ilibft
 LDFLAGS = -Llibft
 LDLIBS = -lft
 CDEBUG = -g
 NAME = fillit
 
-SOURCES = check1.c						\
-					check2.c						\
-					file_transform.c		\
-					main.c
-OBJECTS = $(SOURCES:.c=.o)
-HEADERS = $(NAME).h
+SRC_PATH = src
+SRC_NAME =	check1.c						\
+						check2.c						\
+						file_transform.c		\
+						main.c
+OBJ_PATH = obj
+OBJ_NAME = $(SRC_NAME:.c=.o)
+SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
+OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
+HEADERS = include/$(NAME).h
 
 all: compile
 
-$(NAME): $(OBJECTS) libft/libft.a
-	$(CC) $(CFLAGS) $(COPT) $(LDFLAGS) $(LDLIBS) -o $(NAME) $(OBJECTS)
+$(NAME): $(OBJ) libft/libft.a
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) -o $(NAME) $(OBJ)
 
-$(OBJECTS): $(SOURCES) $(HEADERS)
-	$(CC) $(CFLAGS) $(COPT) -c $(SOURCES)
+$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
+	@mkdir $(OBJ_PATH) 2> /dev/null || true
+	$(CC) $(CFLAGS) -c $< $(CPPFLAGS) -o $@
 
 debug: $(NAME)-debug
 
-$(NAME)-debug : $(SOURCES) $(HEADERS)
-	$(CC) $(CFLAGS) $(COPT) $(CDEBUG) $(LDFLAGS) $(LDLIBS) -o $(NAME)-debug $(OBJECTS)
+$(NAME)-debug : $(SRC) $(HEADERS)
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(CDEBUG) $(LDFLAGS) $(LDLIBS) -o $(NAME)-debug $(OBJ)
 
 compile: libft
 	make $(NAME)
@@ -50,7 +55,7 @@ libft:
 .PHONY: clean
 clean:
 	make -C ./libft clean
-	/bin/rm -f $(OBJECTS)
+	/bin/rm -rf $(OBJ_PATH)
 
 fclean: clean
 	make -C ./libft fclean

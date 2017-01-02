@@ -6,7 +6,7 @@
 /*   By: bzmuda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 09:41:18 by bzmuda            #+#    #+#             */
-/*   Updated: 2016/12/30 17:44:15 by bwaegene         ###   ########.fr       */
+/*   Updated: 2017/01/02 11:28:28 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	**split_array(char *array)
 	char	**tab;
 	int		i;
 	int		j;
-	int aff = 0;
+	/* int aff = 0; */
 	int k;
 	int cpt;
 
