@@ -6,7 +6,7 @@
 /*   By: bzmuda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 09:44:17 by bzmuda            #+#    #+#             */
-/*   Updated: 2016/12/30 10:24:54 by bzmuda           ###   ########.fr       */
+/*   Updated: 2017/01/03 15:05:54 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,5 @@ int		collect_char(char *s);
 int		verif_line(char *s);
 char	*file_to_array(char *file);
 char	**split_array(char *array);
+void	mark_tetriminos(char **tetriminos);
 #endif
