@@ -6,7 +6,7 @@
 #    By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/18 09:48:23 by bwaegene          #+#    #+#              #
-#    Updated: 2017/01/02 17:42:51 by bwaegene         ###   ########.fr        #
+#    Updated: 2017/01/03 13:27:07 by bwaegene         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -14,7 +14,7 @@
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-CPPFLAGS = -Iinclude -Ilibft
+CPPFLAGS = -Isrc -Ilibft
 LDFLAGS = -Llibft
 LDLIBS = -lft
 CDEBUG = -g
@@ -29,7 +29,7 @@ OBJ_PATH = obj
 OBJ_NAME = $(SRC_NAME:.c=.o)
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
-HEADERS = include/$(NAME).h
+HEADERS = $(SRC_PATH)/$(NAME).h
 
 
 DEBUG ?= 0
