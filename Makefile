@@ -25,6 +25,7 @@ SRC_NAME =	check1.c						\
 						check2.c						\
 						file_transform.c		\
 						mark_tetrimino.c		\
+						error.c							\
 						main.c
 OBJ_PATH = obj
 OBJ_NAME = $(SRC_NAME:.c=.o)

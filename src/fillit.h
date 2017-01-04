@@ -6,7 +6,7 @@
 /*   By: bzmuda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 09:44:17 by bzmuda            #+#    #+#             */
-/*   Updated: 2017/01/04 12:36:18 by bwaegene         ###   ########.fr       */
+/*   Updated: 2017/01/04 15:14:00 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,5 @@ char	**str_to_tblstr(char *str);
 int		nb_tetriminos(char *str);
 void	mark_tetriminos(char **tetriminos);
 char	*empty_square(unsigned int side);
+int		str_error(char *str);
 #endif

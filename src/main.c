@@ -6,7 +6,7 @@
 /*   By: bzmuda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 10:06:18 by bzmuda            #+#    #+#             */
-/*   Updated: 2017/01/04 14:47:45 by bwaegene         ###   ########.fr       */
+/*   Updated: 2017/01/04 15:13:15 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,26 +31,17 @@ int		main(int argc, char **argv)
 	char **tblstr;
 
 	if (argc != 2)
-	{
-		ft_putstr_fd("usage: fillit file\n", 2);
-		return (1);
-	}
+		return(str_error("usage: fillit file\n"));
 	file = file_to_str(argv[1]);
 	if (!file || !*file)
-	{
-		ft_putstr_fd("error\n", 2);
-		return (1);
-	}
+		return(str_error("error\n"));
 	tblstr = str_to_tblstr(file);
 	/* ft_putstr(zen[4]); */
 	debug_array(tblstr);
 	//mark_tetriminos(zen);
 	//ft_putstr(empty_square(3));
 	/* if (!check_file(zen)) */
-	/* { */
-	/* 	ft_putstr_fd("error\n", 2); */
-	/* 	return (1); */
-	/* } */
+	/* return(str_error("error\n")); */
 	// Stocker every tetriminos dans une linked list ?
 	// Resolution
 	return (0);
