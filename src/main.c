@@ -6,7 +6,7 @@
 /*   By: bzmuda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 10:06:18 by bzmuda            #+#    #+#             */
-/*   Updated: 2017/01/04 12:36:37 by bwaegene         ###   ########.fr       */
+/*   Updated: 2017/01/04 14:47:45 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void debug_array(char **tblstr)
 {
-	size_t i;
+	int i;
 
 	i = 0;
 	while (tblstr[i])
@@ -27,23 +27,23 @@ void debug_array(char **tblstr)
 
 int		main(int argc, char **argv)
 {
-	char *lol;
-	char **zen;
+	char *file;
+	char **tblstr;
 
 	if (argc != 2)
 	{
 		ft_putstr_fd("usage: fillit file\n", 2);
 		return (1);
 	}
-	lol = file_to_str(argv[1]);
-	if (!lol || !*lol)
+	file = file_to_str(argv[1]);
+	if (!file || !*file)
 	{
 		ft_putstr_fd("error\n", 2);
 		return (1);
 	}
-	zen = str_to_tblstr(lol);
+	tblstr = str_to_tblstr(file);
 	/* ft_putstr(zen[4]); */
-	debug_array(zen);
+	debug_array(tblstr);
 	//mark_tetriminos(zen);
 	//ft_putstr(empty_square(3));
 	/* if (!check_file(zen)) */
