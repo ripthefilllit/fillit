@@ -6,7 +6,7 @@
 /*   By: bzmuda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 09:44:17 by bzmuda            #+#    #+#             */
-/*   Updated: 2017/01/04 15:14:00 by bwaegene         ###   ########.fr       */
+/*   Updated: 2017/01/05 16:21:53 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,13 @@
 # include <string.h>
 # include "libft.h"
 
+typedef struct		s_tetra
+{
+	int				x[4];
+	int				y[4];
+	int				id;
+	struct t_tetra	*next;
+}					t_tetra;
 int		check_file(char **tab);
 int		verif_body(char *s);
 int		get_w(char *s);
@@ -39,4 +46,7 @@ int		nb_tetriminos(char *str);
 void	mark_tetriminos(char **tetriminos);
 char	*empty_square(unsigned int side);
 int		str_error(char *str);
+t_tetra		str_to_tetra(char *str, int id);
+t_tetra		move_tetra(t_tetra tetra, int x, int y);
+t_tetra		normalize_tetra(t_tetra tetra);
 #endif
