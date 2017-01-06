@@ -6,7 +6,7 @@
 /*   By: bzmuda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 19:33:28 by bzmuda            #+#    #+#             */
-/*   Updated: 2016/11/20 14:46:44 by bzmuda           ###   ########.fr       */
+/*   Updated: 2017/01/06 10:41:07 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int					ft_isalpha(int c);
 int					ft_isascii(int c);
 int					ft_isdigit(int c);
 int					ft_isprint(int c);
+int					ft_isupper(int c);
 int					ft_tolower(int c);
 int					ft_toupper(int c);
 
