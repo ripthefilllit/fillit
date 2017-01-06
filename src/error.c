@@ -6,14 +6,20 @@
 /*   By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 15:10:10 by bwaegene          #+#    #+#             */
-/*   Updated: 2017/01/04 15:11:31 by bwaegene         ###   ########.fr       */
+/*   Updated: 2017/01/06 13:00:59 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int		str_error(char *str)
+int		error(void)
 {
-	ft_putstr_fd(str, 2);
-	return (1);
+	ft_putstr_fd("error\n", 2);
+	return (0);
+}
+
+int		usage(void)
+{
+	ft_putstr_fd("usage: fillit file\n", 2);
+	return (0);
 }

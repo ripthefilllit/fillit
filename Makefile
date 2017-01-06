@@ -6,7 +6,7 @@
 #    By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/18 09:48:23 by bwaegene          #+#    #+#              #
-#    Updated: 2017/01/05 11:44:10 by bwaegene         ###   ########.fr        #
+#    Updated: 2017/01/06 18:01:37 by bwaegene         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -23,11 +23,10 @@ NAME = fillit
 SRC_PATH = src
 SRC_NAME =	check1.c						\
 						check2.c						\
-						file_transform.c		\
-						mark_tetrimino.c		\
+						debug.c							\
+						file.c							\
 						error.c							\
-						square.c						\
-						move.c							\
+						store_tetra.c				\
 						main.c
 OBJ_PATH = obj
 OBJ_NAME = $(SRC_NAME:.c=.o)
