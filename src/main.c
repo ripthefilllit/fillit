@@ -6,7 +6,7 @@
 /*   By: bzmuda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 10:06:18 by bzmuda            #+#    #+#             */
-/*   Updated: 2017/01/07 11:52:02 by bwaegene         ###   ########.fr       */
+/*   Updated: 2017/01/07 14:59:53 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int		main(int argc, char **argv)
 		ft_putstr(str);
 		ft_putstr("----\n");
 		tetras_debug(tetras);
+		ft_putnbr(initial_square(tetras));
 	}
 	return (0);
 }

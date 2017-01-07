@@ -6,7 +6,7 @@
 #    By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/18 09:48:23 by bwaegene          #+#    #+#              #
-#    Updated: 2017/01/06 18:01:37 by bwaegene         ###   ########.fr        #
+#    Updated: 2017/01/07 14:37:28 by bwaegene         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -27,6 +27,7 @@ SRC_NAME =	check1.c						\
 						file.c							\
 						error.c							\
 						store_tetra.c				\
+						resolve.c						\
 						main.c
 OBJ_PATH = obj
 OBJ_NAME = $(SRC_NAME:.c=.o)

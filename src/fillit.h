@@ -55,5 +55,8 @@ void				tetra_movey(t_tetra *tetra, int y);
 void				tetras_normalize(t_tetra (*tetras)[26]);
 void				tetras_store(char **str, t_tetra (*tetras)[26]);
 
+int					sqrt_up(int nb);
+int					initial_square(t_tetra tetra[26]);
+
 void				tetras_debug(t_tetra tetras[26]);
 #endif
