@@ -6,7 +6,7 @@
 /*   By: bzmuda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 09:44:17 by bzmuda            #+#    #+#             */
-/*   Updated: 2017/01/07 11:11:32 by bwaegene         ###   ########.fr       */
+/*   Updated: 2017/01/07 14:59:37 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ int					usage(void);
 int					file_to_str(char *file_path, char **str);
 
 t_tetra				str_to_tetra(char *str, char id);
-void				tetra_movex(t_tetra *tetra, int x);
-void				tetra_movey(t_tetra *tetra, int y);
+t_tetra				tetra_movex(t_tetra tetra, int x);
+t_tetra				tetra_movey(t_tetra tetra, int y);
 void				tetras_normalize(t_tetra (*tetras)[26]);
 void				tetras_store(char **str, t_tetra (*tetras)[26]);
 

@@ -6,28 +6,30 @@
 /*   By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 13:33:36 by bwaegene          #+#    #+#             */
-/*   Updated: 2017/01/07 11:46:04 by bwaegene         ###   ########.fr       */
+/*   Updated: 2017/01/07 12:15:04 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void		tetra_movex(t_tetra *tetra, int x)
+t_tetra		tetra_movex(t_tetra tetra, int x)
 {
 	int i;
 
 	i = -1;
 	while (++i < 4)
-		tetra->x[i] += x;
+		tetra.x[i] += x;
+	return (tetra);
 }
 
-void		tetra_movey(t_tetra *tetra, int y)
+t_tetra		tetra_movey(t_tetra tetra, int y)
 {
 	int i;
 
 	i = -1;
 	while (++i < 4)
-		tetra->y[i] += y;
+		tetra.y[i] += y;
+	return (tetra);
 }
 
 /*
@@ -43,10 +45,10 @@ void		tetras_normalize(t_tetra (*tetras)[26])
 	{
 		while ((*tetras)[i].x[0] != 0 && (*tetras)[i].x[1] != 0 &&
 			   (*tetras)[i].x[2] != 0 && (*tetras)[i].x[3] != 0)
-			tetra_movex(&(*tetras)[i], -1);
+			(*tetras)[i] = tetra_movex((*tetras)[i], -1);
 		while ((*tetras)[i].y[0] != 0 && (*tetras)[i].y[1] != 0 &&
 			   (*tetras)[i].y[2] != 0 && (*tetras)[i].y[3] != 0)
-			tetra_movey(&(*tetras)[i], -1);
+			(*tetras)[i] = tetra_movey((*tetras)[i], -1);
 		++i;
 	}
 }
