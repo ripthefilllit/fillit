@@ -6,32 +6,19 @@
 /*   By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 12:39:25 by bwaegene          #+#    #+#             */
-/*   Updated: 2017/01/06 18:04:52 by bwaegene         ###   ########.fr       */
+/*   Updated: 2017/01/07 11:28:04 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "fillit.h"
 
-void	debug_array(char **tblstr)
-{
-	int i;
-
-	i = 0;
-	while (tblstr[i])
-	{
-		ft_putstr(tblstr[i]);
-		ft_putchar('\n');
-		i++;
-	}
-}
-
-void	debug_tetra(t_tetra tetras[26])
+void	tetras_debug(t_tetra tetras[26])
 {
 	int	i;
 
 	i = 0;
-	while (ft_isupper(tetras[i].id))
+	while (tetras[i].id)
 	{
 		printf("tetra %d:\n", i);
 		printf("\tx0: %d,\ty0: %d\n", tetras[i].x[0], tetras[i].y[0]);

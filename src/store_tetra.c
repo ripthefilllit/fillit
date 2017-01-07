@@ -6,45 +6,11 @@
 /*   By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 13:33:36 by bwaegene          #+#    #+#             */
-/*   Updated: 2017/01/06 18:05:32 by bwaegene         ###   ########.fr       */
+/*   Updated: 2017/01/07 11:46:04 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-
-/*
-** Store one tetrimino in the struct.
-*/
-
-/* t_tetra		str_to_tetra(char *str, char id) */
-/* { */
-/* 	int			i; */
-/* 	int			col; */
-/* 	int			line; */
-/* 	t_tetra		tetra; */
-
-/* 	i = 0; */
-/* 	col = 0; */
-/* 	line = 0; */
-/* 	while (i < 4) */
-/* 	{ */
-/* 		if (str[col + (line * 5)] == '#') */
-/* 		{ */
-/* 			tetra.x[i] = col; */
-/* 			tetra.y[i] = line; */
-/* 			++i; */
-/* 		} */
-/* 		if (str[col + (line * 5)] == '\n') */
-/* 		{ */
-/* 			col = 0; */
-/* 			++line; */
-/* 		} */
-/* 		else */
-/* 			++col; */
-/* 	} */
-/* 	tetra.id = id; */
-/* 	return (tetra); */
-/* } */
 
 void		tetra_movex(t_tetra *tetra, int x)
 {
@@ -64,15 +30,32 @@ void		tetra_movey(t_tetra *tetra, int y)
 		tetra->y[i] += y;
 }
 
-void		normalize_tetra(t_tetra *tetra)
+/*
+** Move all the tetraminos to the coordinates x = 0 and y = 0.
+*/
+
+void		tetras_normalize(t_tetra (*tetras)[26])
 {
-	while (tetra->x[0] != 0 && tetra->x[1] != 0 &&
-		   tetra->x[2] != 0 && tetra->x[3] != 0)
-		tetra_movex(tetra, -1);
-	while (tetra->y[0] != 0 && tetra->y[1] != 0 &&
-		   tetra->y[2] != 0 && tetra->y[3] != 0)
-		tetra_movey(tetra, -1);
+	int i;
+
+	i = 0;
+	while ((*tetras)[i].id)
+	{
+		while ((*tetras)[i].x[0] != 0 && (*tetras)[i].x[1] != 0 &&
+			   (*tetras)[i].x[2] != 0 && (*tetras)[i].x[3] != 0)
+			tetra_movex(&(*tetras)[i], -1);
+		while ((*tetras)[i].y[0] != 0 && (*tetras)[i].y[1] != 0 &&
+			   (*tetras)[i].y[2] != 0 && (*tetras)[i].y[3] != 0)
+			tetra_movey(&(*tetras)[i], -1);
+		++i;
+	}
 }
+
+/*
+** Store all the tetraminos by the coordinates of the cubes forming them, the
+** coordinates are normalized. The end of the array is defined by a tetramino
+** with an id of 0.
+*/
 
 void		tetras_store(char **str, t_tetra (*tetras)[26])
 {
@@ -87,17 +70,18 @@ void		tetras_store(char **str, t_tetra (*tetras)[26])
 	{
 		if ((*str)[i] == '#')
 		{
-			(*tetras)[nb_tetra].x[cube] = i % 5;
-			(*tetras)[nb_tetra].y[cube] = (i / 5) - nb_tetra;
+			(*tetras)[nb_tetra].x[cube] = (i - nb_tetra) % 5;
+			(*tetras)[nb_tetra].y[cube] = ((i - nb_tetra) / 5) - (nb_tetra * 4);
+			(*tetras)[nb_tetra].id = 'A' + nb_tetra;
 			++cube;
 		}
 		else if ((*str)[i] == '\n' && (*str)[i + 1] == '\n')
 		{
-			(*tetras)[nb_tetra].id = 'A' + nb_tetra;
 			cube = 0;
 			++nb_tetra;
 		}
 		++i;
 	}
-	(*tetras)[nb_tetra].id = 0;
+	(*tetras)[nb_tetra + 1].id = 0;
+	tetras_normalize(tetras);
 }
