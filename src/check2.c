@@ -12,94 +12,66 @@
 
 #include "fillit.h"
 
-int 	verif_line(char *s)
+int 	verif_line(char *s, int deb, int fin)
 {
-	int x;
 	int y;
-	int followfive;
 
-	x = 0;
 	y = 0;
-	followfive = 4;
-	while (s[x] != '\0')
+	while (s[deb] != '\0' && deb <= fin)
 	{
-		if (s[x] == '.' || s[x] == '#')
+		if (s[deb] == '.' || s[deb] == '#')
 			y++;
 		if (y > 4)
 			return (0);
-		if (s[x] == '\n' && x == followfive)
-		{
+		if (s[deb] == '\n' && y == 4)
 			y = 0;
-			followfive += 5;
-		}
-		x++;
+		deb++;
 	}
 	return (1);
 }
 
-int		collect_char(char *s) // Fait l'inventaire des . # et \n
+int		collect_char(char *s, int deb, int fin) // Fait l'inventaire des . # et \n
 {// Un tetrimino est bon si 4 # 12 . et 4 \n
-	int i;
 	int hashtag;
 	int point;
 	int baqueslache;
 
-	i = 0;
 	hashtag = 0;
 	point = 0;
 	baqueslache = 0;
-	while (s[i] != '\0')
+	while (s[deb] != '\0' && deb <= fin)
 	{
-		if (s[i] == '#')
+		if (s[deb] == '#')
 			hashtag++;
-		if (s[i] == '.')
+		if (s[deb] == '.')
 			point++;
-		if (s[i] == '\n')
+		if (s[deb] == '\n')
 			baqueslache++;
-		if (s[i] != '#' && s[i] != '.' && s[i] != '\n')
+		if (s[deb] != '#' && s[deb] != '.' && s[deb] != '\n')
 			return (0);
-		i++;
+		deb++;
 	}
 	if (hashtag != 4 || point != 12 || baqueslache != 4)
 		return (0);
 	return (1);
 }
 
-int		detective_alone(char *s) // Détecte si tout les # sont liés
+int		detective_alone(char *s, int deb, int fin) // Détecte si tout les # sont liés
 {
-	int i;
 	int valid_hashtag;
-	int ok;
 
 	valid_hashtag = 0;
-	i = 0;
-	ok = 0;
-	while (s[i] != '\0')
+	while (s[deb] != '\0' && deb <= fin)
 	{
-		if (s[i] == '#')
+		if (s[deb] == '#')
 		{
-			if (s[i + 5] == '#' || s[i - 5] == '#' ||\
-					(s[i + 1] == '#') || s[i - 1] == '#')
+			if (s[deb + 5] == '#' || s[deb - 5] == '#' ||\
+					(s[deb + 1] == '#') || s[deb - 1] == '#')
 				valid_hashtag++;
 			if (valid_hashtag == 4)
 				return (1);
 		}
-		i++;
+		deb++;
 	}
 	return (0);
-}
-
-int 	cpt_tetrimino(char **tab)
-{
-	int i;
-	int tablen;
-
-	i = 0;
-	tablen = 0;
-	while (tab[i] != NULL)
-	{
-		tablen++;
-		i++;
-	}
-	return (tablen);
 }

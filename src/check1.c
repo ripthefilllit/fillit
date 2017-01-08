@@ -12,77 +12,73 @@
 
 #include "fillit.h"
 
-int 	another_check(char *s)
+int 	another_check(char *s, int deb, int fin)
 {
-	int i;
 	int h;
 	int eloi;
 
 	eloi = 0;
-	i = 0;
 	h = 0;
-	while (s[i] != '\0')
+	while (deb <= fin)
 	{
-		if (s[i] == '#')
+		if (s[deb] == '#')
 			h++;
-		if (h == 2 && s[i] == '#')
+		if (h == 2 && s[deb] == '#')
 		{
-			while (s[i + 1 + eloi] != '#' && s[i + eloi] != '\0')
+			while (s[deb + 1 + eloi] != '#' && s[deb + eloi] != '\0')
 				eloi++;
 			if (eloi > 5)// Si le deuxieme # est délié du 3eme
 				return (0);
 		}
-		i++;
+		deb++;
 	}
 	return (1);
 }
 
-int		get_h(char *s) // Get_h et w pas protégés, dépendants de detective_alone
+int		get_h(char *s, int deb) // Get_h et w pas protégés, dépendants de detective_alone
 {
-	int i;
 	int height;
+	int follow;
 
-	i = 0;
 	height = 0;
-	while (i < 19)
+	follow = 19 + deb;
+	while (deb <= follow)
 	{
-		if (s[i] == '#' || s[i + 1] == '#' || s[i + 2] == '#' ||\
-				s[i + 3] == '#')
+		if (s[deb] == '#' || s[deb + 1] == '#' || s[deb + 2] == '#' ||\
+				s[deb + 3] == '#')
 			height++;
-		i += 5;
+		deb += 5;
 	}
 	return (height);
 }
 
-int 	get_w(char *s)
+int 	get_w(char *s, int deb)
 {
-	int i;
 	int width;
+	int follow;
 
-	i = 0;
+	follow = 4 + deb;
 	width = 0;
-	while (i < 4)
+	while (deb <= follow)
 	{
-		if (s[i] == '#' || s[i + 5] == '#' || s[i + 10] == '#' ||\
-				s[i + 15] == '#')
+		if (s[deb] == '#' || s[deb + 5] == '#' || s[deb + 10] == '#' ||\
+				s[deb + 15] == '#')
 			width++;
-		i++;
+		deb++;
 	}
 	return (width);
 }
 
-int 	verif_body(char *s)
+int 	verif_body(char *s, int deb, int fin)
 {
-	int i;
 	int h;
 	int w;
 
-	i = 0;
-	h = get_h(s);
-	w = get_w(s);
-	if (detective_alone(s) == 0)
+	h = get_h(s, deb);
+	w = get_w(s, deb);
+	if (detective_alone(s, deb, fin) == 0)
 		return (0);
-	if (another_check(s) == 0 || w == 0 || h == 0)
+	if (another_check(s, deb, fin) == 0 || w == 0 || h == 0)
 		return (0);
 	if (h == 4 && w == 1)// Formes autorisées
 		return (1);
@@ -98,21 +94,29 @@ int 	verif_body(char *s)
 		return (0);
 }
 
-int		check_file(char **tab)
+int		check_file(char *str)
 {
-	int i;
-	int nb_tetrimino;
+	int deb;
+	int fin;
 
-	i = 0;
-	nb_tetrimino = cpt_tetrimino(tab);
-	if (tab[0] == NULL)
+	deb = 0;
+	fin = 19;
+	if (str == NULL)
 		return (0);
-	while (i < nb_tetrimino)
+	while (str)
 	{
-		if (collect_char(tab[i]) == 0 || verif_line(tab[i]) == 0 ||\
-			verif_body(tab[i]) == 0)
+		if (collect_char(str, deb, fin) == 0 || verif_line(str, deb, fin) == 0 ||\
+			verif_body(str, deb, fin) == 0)
 			return (0);
-		i++;
+		if (str[fin + 1] == '\n' && (str[fin + 2] == '.' || str[fin + 2] == '#'))
+		{
+			fin +=21;
+			deb +=21;
+		}
+		else if (str[fin + 1] == '\0')
+			return (1);
+		else
+			return (0);
 	}
 	return (1);
 }
