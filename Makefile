@@ -6,7 +6,7 @@
 #    By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/18 09:48:23 by bwaegene          #+#    #+#              #
-#    Updated: 2017/01/07 14:37:28 by bwaegene         ###   ########.fr        #
+#    Updated: 2017/01/08 18:09:21 by bwaegene         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -41,29 +41,31 @@ ifeq ($(DEBUG), 1)
     CFLAGS += -g
 endif
 
-all: compile
+all: $(NAME)
 
-$(NAME): $(OBJ) $(HEADERS) libft/libft.a
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) -o $(NAME) $(OBJ)
+$(NAME): libft $(OBJ_NAME) $(HEADERS)
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) $(OBJ_NAME) -o $(NAME)
 
-$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
-	@mkdir $(OBJ_PATH) 2> /dev/null || true
-	$(CC) $(CFLAGS) -c $< $(CPPFLAGS) -o $@
+$(OBJ_PATH):
+	mkdir -p $@
 
-compile: libft
-	make $(NAME)
+$(OBJ_NAME): $(SRC)
+	-mkdir -p $(OBJ_PATH)
+	$(CC) $(CFLAGS) -c $^ $(CPPFLAGS)
 
-.PHONY: libft
-libft:
+libft: libft/libft.a
+
+.PHONY: libft/libft.a
+libft/libft.a:
 	make -C ./libft
 
 .PHONY: clean
 clean:
-	make -C ./libft clean
+	$(MAKE) -C ./libft clean
 	/bin/rm -rf $(OBJ_PATH)
 
 fclean: clean
-	make -C ./libft fclean
-	/bin/rm -f $(NAME) $(NAME)-debug
+	$(MAKE) -C ./libft fclean
+	/bin/rm -rf $(NAME) $(NAME).dSYM
 
 re: fclean all
