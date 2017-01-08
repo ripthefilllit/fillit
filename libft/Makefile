@@ -6,7 +6,7 @@
 #    By: bwaegene <brice.wge@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/18 09:48:23 by bwaegene          #+#    #+#              #
-#    Updated: 2017/01/06 10:41:34 by bwaegene         ###   ########.fr        #
+#    Updated: 2017/01/08 14:52:45 by bwaegene         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -79,6 +79,8 @@ SOURCES = ft_atoi.c		\
 					ft_strsub.c	\
 					ft_strtrim.c	\
 					ft_tolower.c	\
+					ft_foreach.c		 \
+					ft_pisnegative.c \
 					ft_toupper.c
 OBJECTS = $(SOURCES:.c=.o)
 HEADERS = $(NAME:.a=.h)
