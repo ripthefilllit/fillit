@@ -6,7 +6,7 @@
 /*   By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 15:10:10 by bwaegene          #+#    #+#             */
-/*   Updated: 2017/01/06 13:00:59 by bwaegene         ###   ########.fr       */
+/*   Updated: 2017/01/08 12:03:50 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		error(void)
 {
-	ft_putstr_fd("error\n", 2);
+	ft_putstr_fd("error\n", 1);
 	return (0);
 }
 
