@@ -6,7 +6,7 @@
 #    By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/18 09:48:23 by bwaegene          #+#    #+#              #
-#    Updated: 2017/01/08 18:09:21 by bwaegene         ###   ########.fr        #
+#    Updated: 2017/01/09 13:32:05 by bwaegene         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -43,19 +43,20 @@ endif
 
 all: $(NAME)
 
-$(NAME): libft $(OBJ_NAME) $(HEADERS)
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) $(OBJ_NAME) -o $(NAME)
+$(NAME): libft $(OBJ) $(HEADERS)
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) $(OBJ) -o $(NAME)
 
 $(OBJ_PATH):
-	mkdir -p $@
+	mkdir $@
 
-$(OBJ_NAME): $(SRC)
-	-mkdir -p $(OBJ_PATH)
-	$(CC) $(CFLAGS) -c $^ $(CPPFLAGS)
+$(OBJ): | $(OBJ_PATH)
+
+$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
+	$(CC) $(CFLAGS) -c $< $(CPPFLAGS) -o $@
 
 libft: libft/libft.a
 
-.PHONY: libft/libft.a
+# .PHONY: libft/libft.a
 libft/libft.a:
 	make -C ./libft
 
