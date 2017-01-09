@@ -22,6 +22,8 @@ int		main(int argc, char **argv)
 	if (file_to_str(argv[1], &str))
 	{
 		// Check if the file contain only valid tetriminos
+		if (!check_file(str))
+			return (error());
 		// Then create the table of struct
 		tetras_store(&str, &tetras);
 		// Resolve the problem if ti doesn't take too long
