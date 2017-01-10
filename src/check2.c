@@ -75,3 +75,42 @@ int		detective_alone(char *s, int deb, int fin) // Détecte si tout les # sont l
 	}
 	return (0);
 }
+
+int 	detective_love(char *s, int deb, int fin)
+{
+	int hash;
+	int zen;
+	int cpt;
+	
+	zen = 0;
+	hash = 0;
+	cpt = 0;
+	while (s[deb] != '\0' && deb <= fin)
+	{
+		if (s[deb] == '#')
+			hash++;
+		while (hash > 0 || hash < 5)
+		{
+			if (s[deb + 5] == '#')
+				zen++;
+			if (s[deb - 5] == '#')
+				zen++;
+			if (s[deb + 1] == '#')
+				zen++;
+			if (s[deb - 1] == '#')
+				zen++;
+			if (zen >= 2)
+				cpt++;
+			while (s[deb] != '#')
+				deb++;
+			hash++;
+			zen = 0;
+			if (hash == 4 && cpt >= 2)
+				return (1);
+		}
+		if (hash == 4 && cpt < 2)
+			return (0);
+		deb++;
+	}
+	return (0);
+}

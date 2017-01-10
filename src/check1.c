@@ -106,7 +106,7 @@ int		check_file(char *str)
 	while (str)
 	{
 		if (collect_char(str, deb, fin) == 0 || verif_line(str, deb, fin) == 0 ||\
-			verif_body(str, deb, fin) == 0)
+			verif_body(str, deb, fin) == 0 || detective_love(str, deb, fin) == 0)
 			return (0);
 		if (str[fin + 1] == '\n' && (str[fin + 2] == '.' || str[fin + 2] == '#'))
 		{
