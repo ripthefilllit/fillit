@@ -6,7 +6,7 @@
 /*   By: bzmuda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 09:41:05 by bzmuda            #+#    #+#             */
-/*   Updated: 2016/12/30 17:43:45 by bwaegene         ###   ########.fr       */
+/*   Updated: 2017/01/10 14:36:27 by bzmuda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,15 +81,13 @@ int 	detective_love(char *s, int deb, int fin)
 	int hash;
 	int zen;
 	int cpt;
-	
+
 	zen = 0;
 	hash = 0;
 	cpt = 0;
-	while (s[deb] != '\0' && deb <= fin)
+	while (s[deb] != '\0' || deb <= fin)
 	{
 		if (s[deb] == '#')
-			hash++;
-		while (hash > 0 || hash < 5)
 		{
 			if (s[deb + 5] == '#')
 				zen++;
@@ -101,15 +99,11 @@ int 	detective_love(char *s, int deb, int fin)
 				zen++;
 			if (zen >= 2)
 				cpt++;
-			while (s[deb] != '#')
-				deb++;
 			hash++;
-			zen = 0;
-			if (hash == 4 && cpt >= 2)
+			if ((hash == 4 && cpt >= 2) || (zen == 3))
 				return (1);
+			zen = 0;
 		}
-		if (hash == 4 && cpt < 2)
-			return (0);
 		deb++;
 	}
 	return (0);
