@@ -6,7 +6,7 @@
 #    By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/18 09:48:23 by bwaegene          #+#    #+#              #
-#    Updated: 2017/01/09 17:41:28 by bwaegene         ###   ########.fr        #
+#    Updated: 2017/01/10 15:07:06 by bwaegene         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -45,7 +45,7 @@ endif
 
 all: $(NAME)
 
-$(NAME): libft $(OBJ) $(HEADERS)
+$(NAME): libft/libft.a $(OBJ) $(HEADERS)
 	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) $(OBJ) -o $(NAME)
 
 $(OBJ_PATH):
@@ -60,10 +60,10 @@ $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 # If make on the libft directory should rebuild something then PHONY the rule
 # libft to build it. Otherwise it relink.
 ifeq ($(shell make --question -C ./libft ; echo $$?), 1)
-.PHONY: libft
+.PHONY: libft/libft.a
 endif
 
-libft:
+libft/libft.a:
 	make -C ./libft
 
 .PHONY: clean
