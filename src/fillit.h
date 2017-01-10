@@ -42,6 +42,7 @@ char		   		**str_to_tblstr(char *str);
 int					nb_tetriminos(char *str);
 void				mark_tetriminos(char **tetriminos);
 char				*empty_square(unsigned int side);
+int 				detective_love(char *s, int deb, int fin);
 
 int					error(void);
 int					usage(void);
