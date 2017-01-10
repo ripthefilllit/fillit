@@ -6,7 +6,7 @@
 /*   By: bzmuda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 09:44:17 by bzmuda            #+#    #+#             */
-/*   Updated: 2017/01/10 16:53:53 by bwaegene         ###   ########.fr       */
+/*   Updated: 2017/01/10 18:12:20 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,9 @@ void				tetras_store(char **str, t_tetra (*tetras)[26]);
 
 int					sqrt_up(int nb);
 int					initial_square(t_tetra tetra[26]);
+
+char				id_at_position(t_tetra tetras[26], int x, int y);
+void				display_result(t_tetra tetras[26], int side);
 
 void				tetras_debug(t_tetra tetras[26]);
 #endif
