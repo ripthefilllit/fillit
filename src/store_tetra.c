@@ -6,7 +6,7 @@
 /*   By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 13:33:36 by bwaegene          #+#    #+#             */
-/*   Updated: 2017/01/07 12:15:04 by bwaegene         ###   ########.fr       */
+/*   Updated: 2017/01/10 15:46:30 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ void		tetras_normalize(t_tetra (*tetras)[26])
 	while ((*tetras)[i].id)
 	{
 		while ((*tetras)[i].x[0] != 0 && (*tetras)[i].x[1] != 0 &&
-			   (*tetras)[i].x[2] != 0 && (*tetras)[i].x[3] != 0)
+				(*tetras)[i].x[2] != 0 && (*tetras)[i].x[3] != 0)
 			(*tetras)[i] = tetra_movex((*tetras)[i], -1);
 		while ((*tetras)[i].y[0] != 0 && (*tetras)[i].y[1] != 0 &&
-			   (*tetras)[i].y[2] != 0 && (*tetras)[i].y[3] != 0)
+				(*tetras)[i].y[2] != 0 && (*tetras)[i].y[3] != 0)
 			(*tetras)[i] = tetra_movey((*tetras)[i], -1);
 		++i;
 	}
@@ -63,7 +63,7 @@ void		tetras_store(char **str, t_tetra (*tetras)[26])
 {
 	size_t	i;
 	int		cube;
-	int 	nb_tetra;
+	int		nb_tetra;
 
 	i = 0;
 	cube = 0;

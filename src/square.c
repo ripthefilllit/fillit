@@ -6,7 +6,7 @@
 /*   By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 15:24:16 by bwaegene          #+#    #+#             */
-/*   Updated: 2017/01/04 16:49:30 by bwaegene         ###   ########.fr       */
+/*   Updated: 2017/01/10 15:51:47 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*empty_square(unsigned int side)
 	i = -1;
 	while (--len >= 0)
 	{
-		if (++i  == 0)
+		if (++i == 0)
 			square[len] = '\n';
 		else if (i == side)
 		{
