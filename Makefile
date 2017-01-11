@@ -6,11 +6,11 @@
 #    By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/18 09:48:23 by bwaegene          #+#    #+#              #
-#    Updated: 2017/01/10 16:59:33 by bwaegene         ###   ########.fr        #
+#    Updated: 2017/01/11 10:37:09 by bwaegene         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-# Disable implucit rules
+# Disable implicit rules
 .SUFFIXES:
 
 # Compiler flags
