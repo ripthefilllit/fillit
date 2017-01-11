@@ -6,7 +6,7 @@
 /*   By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 10:48:29 by bwaegene          #+#    #+#             */
-/*   Updated: 2017/01/10 18:09:54 by bwaegene         ###   ########.fr       */
+/*   Updated: 2017/01/11 16:09:12 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char		id_at_position(t_tetra tetras[26], int x, int y)
 
 	i = 0;
 	j = 0;
-	while (tetras[i].id)
+	while (ft_isupper(tetras[i].id))
 	{
 		j = 0;
 		while (j < 4)

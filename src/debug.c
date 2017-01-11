@@ -6,7 +6,7 @@
 /*   By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 12:39:25 by bwaegene          #+#    #+#             */
-/*   Updated: 2017/01/07 11:28:04 by bwaegene         ###   ########.fr       */
+/*   Updated: 2017/01/11 16:08:38 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	tetras_debug(t_tetra tetras[26])
 	int	i;
 
 	i = 0;
-	while (tetras[i].id)
+	while (ft_isupper(tetras[i].id))
 	{
 		printf("tetra %d:\n", i);
 		printf("\tx0: %d,\ty0: %d\n", tetras[i].x[0], tetras[i].y[0]);

@@ -6,7 +6,7 @@
 /*   By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 13:33:36 by bwaegene          #+#    #+#             */
-/*   Updated: 2017/01/10 15:46:30 by bwaegene         ###   ########.fr       */
+/*   Updated: 2017/01/11 16:14:23 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void		tetras_normalize(t_tetra (*tetras)[26])
 	int i;
 
 	i = 0;
-	while ((*tetras)[i].id)
+	while (ft_isupper((*tetras)[i].id))
 	{
 		while ((*tetras)[i].x[0] != 0 && (*tetras)[i].x[1] != 0 &&
 				(*tetras)[i].x[2] != 0 && (*tetras)[i].x[3] != 0)
@@ -56,7 +56,7 @@ void		tetras_normalize(t_tetra (*tetras)[26])
 /*
 ** Store all the tetraminos by the coordinates of the cubes forming them, the
 ** coordinates are normalized. The end of the array is defined by a tetramino
-** with an id of 0.
+** with an id which isn't an upper letter.
 */
 
 void		tetras_store(char **str, t_tetra (*tetras)[26])
