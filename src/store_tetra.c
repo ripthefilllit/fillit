@@ -6,7 +6,7 @@
 /*   By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 13:33:36 by bwaegene          #+#    #+#             */
-/*   Updated: 2017/01/11 16:14:23 by bwaegene         ###   ########.fr       */
+/*   Updated: 2017/01/12 14:15:09 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ t_tetra		tetra_movey(t_tetra tetra, int y)
 	while (++i < 4)
 		tetra.y[i] += y;
 	return (tetra);
+}
+
+t_tetra		tetra_move(t_tetra tetra, int x, int y)
+{
+	return(tetra_movey(tetra_movex(tetra, x), y));
 }
 
 /*

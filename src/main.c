@@ -6,7 +6,7 @@
 /*   By: bzmuda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 10:06:18 by bzmuda            #+#    #+#             */
-/*   Updated: 2017/01/07 14:59:53 by bwaegene         ###   ########.fr       */
+/*   Updated: 2017/01/11 16:35:40 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int		main(int argc, char **argv)
 {
 	char	*str;
+	int 	square;
 	t_tetra	tetras[26];
 
 	if (argc != 2)
@@ -26,12 +27,14 @@ int		main(int argc, char **argv)
 			return (error());
 		// Then create the table of struct
 		tetras_store(&str, &tetras);
-		// Resolve the problem if ti doesn't take too long
 		/* /!\ DEBUG /!\ */
 		ft_putstr(str);
 		ft_putstr("----\n");
 		tetras_debug(tetras);
-		ft_putnbr(initial_square(tetras));
+		// Find the smalest square
+		square = resolve(&tetras);
+		// Display the result
+		display_result(tetras, square);
 	}
 	return (0);
 }
