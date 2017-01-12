@@ -108,14 +108,6 @@ int	detective_love(char *s, int deb, int fin)
 	{
 		if (s[deb] == '#')
 		{
-			/*if (s[deb + 5] == '#')
-				zen++;
-			if (s[deb - 5] == '#')
-				zen++;
-			if (s[deb + 1] == '#')
-				zen++;
-			if (s[deb - 1] == '#')
-				zen++;*/
 			s[deb + 5] == '#' ? zen++ : zen;
 			s[deb - 5] == '#' ? zen++ : zen;
 			s[deb + 1] == '#' ? zen++ : zen;
