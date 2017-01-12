@@ -12,7 +12,11 @@
 
 #include "fillit.h"
 
-int 	verif_line(char *s, int deb, int fin)
+/*
+**  Verifying if each line of the block ends with \n and has 4 characters.
+*/
+
+int	verif_line(char *s, int deb, int fin)
 {
 	int y;
 
@@ -30,8 +34,13 @@ int 	verif_line(char *s, int deb, int fin)
 	return (1);
 }
 
-int		collect_char(char *s, int deb, int fin) // Fait l'inventaire des . # et \n
-{// Un tetrimino est bon si 4 # 12 . et 4 \n
+/*
+**  Counting '#'' and '.' .
+** A tetrimino is valid only if it contains 4#, 12. and 4\n.
+*/
+
+int	collect_char(char *s, int deb, int fin)
+{
 	int hashtag;
 	int point;
 	int baqueslache;
@@ -56,7 +65,11 @@ int		collect_char(char *s, int deb, int fin) // Fait l'inventaire des . # et \n
 	return (1);
 }
 
-int		detective_alone(char *s, int deb, int fin) // Détecte si tout les # sont liés
+/*
+**  Detecting if each '#' is as least next to 1 another '#'.
+*/
+
+int	detective_alone(char *s, int deb, int fin)
 {
 	int valid_hashtag;
 
@@ -76,7 +89,13 @@ int		detective_alone(char *s, int deb, int fin) // Détecte si tout les # sont l
 	return (0);
 }
 
-int 	detective_love(char *s, int deb, int fin)
+/*
+**  Detecting if each '#' is as least next to 2 another '#'.
+** 	Special case on the *** tetrimino ...
+**  ... where only one tetrimino should touch 3 '#'
+*/
+
+int	detective_love(char *s, int deb, int fin)
 {
 	int hash;
 	int zen;
@@ -89,14 +108,18 @@ int 	detective_love(char *s, int deb, int fin)
 	{
 		if (s[deb] == '#')
 		{
-			if (s[deb + 5] == '#')
+			/*if (s[deb + 5] == '#')
 				zen++;
 			if (s[deb - 5] == '#')
 				zen++;
 			if (s[deb + 1] == '#')
 				zen++;
 			if (s[deb - 1] == '#')
-				zen++;
+				zen++;*/
+			s[deb + 5] == '#' ? zen++ : zen;
+			s[deb - 5] == '#' ? zen++ : zen;
+			s[deb + 1] == '#' ? zen++ : zen;
+			s[deb - 1] == '#' ? zen++ : zen;
 			if (zen >= 2)
 				cpt++;
 			hash++;

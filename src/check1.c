@@ -12,7 +12,11 @@
 
 #include "fillit.h"
 
-int 	another_check(char *s, int deb, int fin)
+/*
+**  Detecting if the second '#' is next to the third '#'.
+*/
+
+int	another_check(char *s, int deb, int fin)
 {
 	int h;
 	int eloi;
@@ -27,7 +31,7 @@ int 	another_check(char *s, int deb, int fin)
 		{
 			while (s[deb + 1 + eloi] != '#' && s[deb + eloi] != '\0')
 				eloi++;
-			if (eloi > 5)// Si le deuxieme # est délié du 3eme
+			if (eloi > 5)
 				return (0);
 		}
 		deb++;
@@ -35,7 +39,11 @@ int 	another_check(char *s, int deb, int fin)
 	return (1);
 }
 
-int		get_h(char *s, int deb) // Get_h et w pas protégés, dépendants de detective_alone
+/*
+**  Returning the height of a tetrimino.
+*/
+
+int	get_h(char *s, int deb)
 {
 	int height;
 	int follow;
@@ -52,7 +60,11 @@ int		get_h(char *s, int deb) // Get_h et w pas protégés, dépendants de detect
 	return (height);
 }
 
-int 	get_w(char *s, int deb)
+/*
+**  Returning the width of a tetrimino.
+*/
+
+int	get_w(char *s, int deb)
 {
 	int width;
 	int follow;
@@ -69,7 +81,11 @@ int 	get_w(char *s, int deb)
 	return (width);
 }
 
-int 	verif_body(char *s, int deb, int fin)
+/*
+**  Checks if the shape of each tetrimino is valid (5 right cases).
+*/
+
+int	verif_body(char *s, int deb, int fin)
 {
 	int h;
 	int w;
@@ -80,7 +96,7 @@ int 	verif_body(char *s, int deb, int fin)
 		return (0);
 	if (another_check(s, deb, fin) == 0 || w == 0 || h == 0)
 		return (0);
-	if (h == 4 && w == 1)// Formes autorisées
+	if (h == 4 && w == 1)
 		return (1);
 	else if (h == 1 && w == 4)
 		return (1);
@@ -94,24 +110,29 @@ int 	verif_body(char *s, int deb, int fin)
 		return (0);
 }
 
-int		check_file(char *str)
+/*
+**  Main fuction of the file checker.
+*/
+
+int	check_file(char *str)
 {
 	int deb;
 	int fin;
 
 	deb = 0;
 	fin = 19;
-	if (str == NULL)
-		return (0);
 	while (str)
 	{
-		if (collect_char(str, deb, fin) == 0 || verif_line(str, deb, fin) == 0 ||\
-			verif_body(str, deb, fin) == 0 || detective_love(str, deb, fin) == 0)
+		if (collect_char(str, deb, fin) == 0 ||\
+			verif_line(str, deb, fin) == 0 ||\
+			verif_body(str, deb, fin) == 0 ||\
+			detective_love(str, deb, fin) == 0)
 			return (0);
-		if (str[fin + 1] == '\n' && (str[fin + 2] == '.' || str[fin + 2] == '#'))
+		if (str[fin + 1] == '\n' && (str[fin + 2] == '.' ||\
+			str[fin + 2] == '#'))
 		{
-			fin +=21;
-			deb +=21;
+			fin += 21;
+			deb += 21;
 		}
 		else if (str[fin + 1] == '\0')
 			return (1);
