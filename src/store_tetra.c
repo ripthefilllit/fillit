@@ -6,7 +6,7 @@
 /*   By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 13:33:36 by bwaegene          #+#    #+#             */
-/*   Updated: 2017/01/12 14:15:09 by bwaegene         ###   ########.fr       */
+/*   Updated: 2017/01/13 16:28:45 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,16 @@ t_tetra		tetra_move(t_tetra tetra, int x, int y)
 ** Move all the tetraminos to the coordinates x = 0 and y = 0.
 */
 
+void		tetra_normalize(t_tetra (*tetras)[26], int tetra)
+{
+	while ((*tetras)[tetra].x[0] != 0 && (*tetras)[tetra].x[1] != 0 &&
+		   (*tetras)[tetra].x[2] != 0 && (*tetras)[tetra].x[3] != 0)
+		(*tetras)[tetra] = tetra_movex((*tetras)[tetra], -1);
+	while ((*tetras)[tetra].y[0] != 0 && (*tetras)[tetra].y[1] != 0 &&
+		   (*tetras)[tetra].y[2] != 0 && (*tetras)[tetra].y[3] != 0)
+		(*tetras)[tetra] = tetra_movey((*tetras)[tetra], -1);
+}
+
 void		tetras_normalize(t_tetra (*tetras)[26])
 {
 	int i;
@@ -48,12 +58,7 @@ void		tetras_normalize(t_tetra (*tetras)[26])
 	i = 0;
 	while (ft_isupper((*tetras)[i].id))
 	{
-		while ((*tetras)[i].x[0] != 0 && (*tetras)[i].x[1] != 0 &&
-				(*tetras)[i].x[2] != 0 && (*tetras)[i].x[3] != 0)
-			(*tetras)[i] = tetra_movex((*tetras)[i], -1);
-		while ((*tetras)[i].y[0] != 0 && (*tetras)[i].y[1] != 0 &&
-				(*tetras)[i].y[2] != 0 && (*tetras)[i].y[3] != 0)
-			(*tetras)[i] = tetra_movey((*tetras)[i], -1);
+		tetra_normalize(tetras, i);
 		++i;
 	}
 }
