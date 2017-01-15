@@ -6,7 +6,7 @@
 /*   By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 13:33:36 by bwaegene          #+#    #+#             */
-/*   Updated: 2017/01/13 16:28:45 by bwaegene         ###   ########.fr       */
+/*   Updated: 2017/01/15 20:54:40 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,9 @@ t_tetra		tetra_move(t_tetra tetra, int x, int y)
 
 void		tetra_normalize(t_tetra (*tetras)[26], int tetra)
 {
-	while ((*tetras)[tetra].x[0] != 0 && (*tetras)[tetra].x[1] != 0 &&
-		   (*tetras)[tetra].x[2] != 0 && (*tetras)[tetra].x[3] != 0)
+	while ((*tetras)[tetra].x[0] > 0)
 		(*tetras)[tetra] = tetra_movex((*tetras)[tetra], -1);
-	while ((*tetras)[tetra].y[0] != 0 && (*tetras)[tetra].y[1] != 0 &&
-		   (*tetras)[tetra].y[2] != 0 && (*tetras)[tetra].y[3] != 0)
+	while ((*tetras)[tetra].y[0] > 0)
 		(*tetras)[tetra] = tetra_movey((*tetras)[tetra], -1);
 }
 
