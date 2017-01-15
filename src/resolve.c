@@ -106,7 +106,7 @@ int		is_place_free(t_tetra tetras[26], int tetra, int xy[2])
 int		is_large_enough(t_tetra (*tetras)[26], int tetra, int xy[2], int side)
 {
 	// Condition de reussite
-	if (tetra > tetras_count(*tetras))
+	if (tetra >= tetras_count(*tetras))
 		return (1);
 	// Place le tetramino si possible
 	if (is_inside_square(*tetras, tetra, xy, side) &&
@@ -122,27 +122,26 @@ int		is_large_enough(t_tetra (*tetras)[26], int tetra, int xy[2], int side)
 	{
 		++(xy[0]);
 		/* tetra_normalize(tetras, tetra); */
-		is_large_enough(tetras, tetra, xy, side);
+		return (is_large_enough(tetras, tetra, xy, side));
 	}
 	else if (xy[1] < side - 1)
 	{
 		xy[0] = 0;
 		++(xy[1]);
 		/* tetra_normalize(tetras, tetra); */
-		is_large_enough(tetras, tetra, xy, side);
+		return (is_large_enough(tetras, tetra, xy, side));
 	}		
 	//tetra_normalize(tetras, tetra);
 		//ft_putstr("trolol");
 		//++(xy[0]
-
-	if (xy[0] == side - 1 && 
+	else if (xy[0] == side - 1 && 
 	        xy[1] == side - 1)
     {
 		xy[0] = *(*tetras)[tetra - 1].x + 1;
 		xy[1] = *(*tetras)[tetra - 1].y;
 		tetra_normalize(tetras, tetra - 1);
 		//tetra_movex((*tetras)[tetra - 1], 1);
-		is_large_enough(tetras, tetra-1, xy, side);
+		return (is_large_enough(tetras, tetra-1, xy, side));
 	}
 	return (0);
 }
@@ -165,8 +164,8 @@ int		resolve(t_tetra (*tetras)[26])
 		xy[1] = 0;
 		if (is_large_enough(tetras, tetra, xy, side))
 			return (side);
-		ft_putstr("----\n");
-		display_result(*tetras, side);
+		//ft_putstr("----\n");
+		//display_result(*tetras, side);
 		tetras_normalize(tetras);
 		++side;
 	}
