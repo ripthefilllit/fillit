@@ -47,7 +47,7 @@ int		tetras_count(t_tetra tetras[26])
 
 int		initial_square(t_tetra tetras[26])
 {
-	return (sqrt_up(tetras_count(tetras) * 4));
+	return (ft_sqrt(tetras_count(tetras) * 4));
 }
 
 /*
