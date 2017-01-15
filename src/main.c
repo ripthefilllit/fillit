@@ -27,10 +27,10 @@ int		main(int argc, char **argv)
 			return (error());
 		// Then create the table of struct
 		tetras_store(&str, &tetras);
-		/* /!\ DEBUG /!\ */
-		ft_putstr(str);
-		ft_putstr("----\n");
-		tetras_debug(tetras);
+		/*1 /!\ DEBUG /!\ */
+		//ft_putstr(str);
+		//ft_putstr("----\n");
+		//tetras_debug(tetras);
 		// Find the smalest square
 		square = resolve(&tetras);
 		// Display the result

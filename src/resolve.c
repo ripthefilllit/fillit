@@ -130,14 +130,20 @@ int		is_large_enough(t_tetra (*tetras)[26], int tetra, int xy[2], int side)
 		++(xy[1]);
 		/* tetra_normalize(tetras, tetra); */
 		is_large_enough(tetras, tetra, xy, side);
+	}		
+	//tetra_normalize(tetras, tetra);
+		//ft_putstr("trolol");
+		//++(xy[0]
+
+	if (xy[0] == side - 1 && 
+	        xy[1] == side - 1)
+    {
+		xy[0] = *(*tetras)[tetra - 1].x + 1;
+		xy[1] = *(*tetras)[tetra - 1].y;
+		tetra_normalize(tetras, tetra - 1);
+		//tetra_movex((*tetras)[tetra - 1], 1);
+		is_large_enough(tetras, tetra-1, xy, side);
 	}
-	/* else if (xy[0] == side - 1 && */
-	/* 		 xy[1] == side - 1) */
-	/* { */
-	/* 	tetra_normalize(tetras, tetra); */
-	/* 	++(xy[0]); */
-	/* 	is_large_enough(tetras, tetra - 1, xy, side); */
-	/* } */
 	return (0);
 }
 
@@ -152,7 +158,7 @@ int		resolve(t_tetra (*tetras)[26])
 	int		side;
 
 	side = initial_square(*tetras);
-	while (side < 6)
+	while (side < 11)
 	{
 		tetra = 0;
 		xy[0] = 0;
