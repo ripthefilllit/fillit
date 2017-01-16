@@ -6,7 +6,7 @@
 /*   By: bzmuda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 09:44:17 by bzmuda            #+#    #+#             */
-/*   Updated: 2017/01/16 15:18:56 by bwaegene         ###   ########.fr       */
+/*   Updated: 2017/01/16 20:13:21 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,13 @@ void				tetras_normalize(t_tetra (*tetras)[26]);
 void				tetra_normalize(t_tetra (*tetras)[26], int tetra);
 void				tetras_store(char **str, t_tetra (*tetras)[26]);
 
-int					sqrt_up(int nb);
 int					initial_square(t_tetra (*tetra)[26]);
 int					resolve(t_tetra (*tetras)[26]);
 
 char				id_at_position(t_tetra tetras[26], int x, int y);
 void				display_result(t_tetra tetras[26], int side);
 
-void				tetras_debug(t_tetra tetras[26]);
+int					tetras_count(t_tetra (*tetras)[26]);
+int					is_inside_square(t_tetra tetras[26], int tetra,
+										int xy[2], int *side);
 #endif

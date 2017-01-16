@@ -6,69 +6,11 @@
 /*   By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 14:03:52 by bwaegene          #+#    #+#             */
-/*   Updated: 2017/01/16 19:35:57 by bwaegene         ###   ########.fr       */
+/*   Updated: 2017/01/16 20:11:54 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-
-/*
-** Compute the square root, rounded up, of a given number.
-*/
-
-int		sqrt_up(int nb)
-{
-	int i;
-
-	i = 1;
-	if (nb == 1)
-		return (1);
-	else if (nb <= 0)
-		return (0);
-	while (i * i <= nb && i < nb)
-		i++;
-	return (i);
-}
-
-int		tetras_count(t_tetra (*tetras)[26])
-{
-	int i;
-
-	i = 0;
-	while ((*tetras)[i].id)
-		++i;
-	return (i);
-}
-
-/*
-** Compute the side of the tiniest square able to contain all the parts of the
-** tetraminos in the given array.
-*/
-
-int		initial_square(t_tetra (*tetras)[26])
-{
-	return (ft_sqrt(tetras_count(tetras) * 4));
-}
-
-/*
-** Verify that the tetraminos we want to place is inside the square
-*/
-
-int		is_inside_square(t_tetra tetras[26], int tetra, int xy[2], int *side)
-{
-	int i;
-
-	if (tetra < 0)
-		return (0);
-	i = -1;
-	while (++i < 4)
-		if (!(tetras[tetra].x[i] + xy[0] < *side &&
-			  tetras[tetra].x[i] + xy[0] >= 0 &&
-			  tetras[tetra].y[i] + xy[1] < *side &&
-			  tetras[tetra].y[i] + xy[1] >= 0))
-			return (0);
-	return (1);
-}
 
 int		is_place_free(t_tetra tetras[26], int tetra, int xy[2])
 {
@@ -76,20 +18,15 @@ int		is_place_free(t_tetra tetras[26], int tetra, int xy[2])
 	int j;
 	int	k;
 
-	// Verifie que le tetraminos n'est pas en dehors du plateau
 	i = 0;
-	// Boucule sur les tetraminos
 	while (i < tetra)
 	{
 		j = 0;
-		// Boucle sur les cubes du tetraminos a placer
 		while (j < 4)
 		{
 			k = 0;
-			// Boucle sur les cubes des tetriminos avant le tetriminos a placer
 			while (k < 4)
 			{
-				// Si les coordonnes du cube sont differentes de l'a
 				if (!(tetras[tetra].x[j] + xy[0] == tetras[i].x[k] &&
 						tetras[tetra].y[j] + xy[1] == tetras[i].y[k]))
 					++k;
@@ -119,7 +56,6 @@ int		place_tetra(t_tetra (*tetras)[26], int tetra, int xy[2], int *side)
 			xy[1] = 0;
 			return (1);
 		}
-		// Decale le tetrimino pour essayer de le placer
 		if (xy[0] < *side - 1)
 		{
 			++(xy[0]);
@@ -140,7 +76,7 @@ int		place_tetra(t_tetra (*tetras)[26], int tetra, int xy[2], int *side)
 int		is_large_enough(t_tetra (*tetras)[26], int tetra, int xy[2], int *side)
 {
 	while (tetra < tetras_count(tetras) && tetra >= 0)
-    {
+	{
 		if (place_tetra(tetras, tetra, xy, side))
 			++tetra;
 		else
@@ -166,8 +102,7 @@ int		resolve(t_tetra (*tetras)[26])
 	int		xy[2];
 	int		side;
 
-	side = initial_square(tetras);
-	/* side = 4; */
+	side = ft_sqrt(tetras_count(tetras) * 4);
 	while (side < 11)
 	{
 		tetra = 0;
@@ -175,8 +110,6 @@ int		resolve(t_tetra (*tetras)[26])
 		xy[1] = 0;
 		if (is_large_enough(tetras, tetra, xy, &side))
 			return (side);
-		/* ft_putstr("----\n"); */
-		/* display_result(*tetras, side); */
 		tetras_normalize(tetras);
 		++side;
 	}
