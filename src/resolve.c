@@ -6,7 +6,7 @@
 /*   By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 14:03:52 by bwaegene          #+#    #+#             */
-/*   Updated: 2017/01/16 18:56:50 by bwaegene         ###   ########.fr       */
+/*   Updated: 2017/01/16 19:35:57 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int		is_place_free(t_tetra tetras[26], int tetra, int xy[2])
 }
 
 /*
-** Try to place a tetrimino. Return 
+** Try to place a tetrimino. Return 1 if succesfull, 0 if not.
 */
 
 int		place_tetra(t_tetra (*tetras)[26], int tetra, int xy[2], int *side)
@@ -139,21 +139,20 @@ int		place_tetra(t_tetra (*tetras)[26], int tetra, int xy[2], int *side)
 
 int		is_large_enough(t_tetra (*tetras)[26], int tetra, int xy[2], int *side)
 {
-	// Condition de reussite
-	if (tetra < 0)
-		return (0);
-	if (tetra >= tetras_count(tetras))
-		return (1);
-    // Place le tetramino si possible
-	if (place_tetra(tetras, tetra, xy, side))
-		return (is_large_enough(tetras, tetra + 1, xy, side));
-	else
-	{
-		xy[0] = (*tetras)[tetra - 1].x[0] + 1;
-		xy[1] = (*tetras)[tetra - 1].y[0];
-		tetra_normalize(tetras, tetra - 1);
-		return (is_large_enough(tetras, tetra - 1, xy, side));
+	while (tetra < tetras_count(tetras) && tetra >= 0)
+    {
+		if (place_tetra(tetras, tetra, xy, side))
+			++tetra;
+		else
+		{
+			xy[0] = (*tetras)[tetra - 1].x[0] + 1;
+			xy[1] = (*tetras)[tetra - 1].y[0];
+			tetra_normalize(tetras, tetra - 1);
+			--tetra;
+		}
 	}
+	if (tetra >= 0)
+		return (1);
 	return (0);
 }
 
