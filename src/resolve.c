@@ -6,7 +6,7 @@
 /*   By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 14:03:52 by bwaegene          #+#    #+#             */
-/*   Updated: 2017/01/15 21:34:58 by bwaegene         ###   ########.fr       */
+/*   Updated: 2017/01/16 18:56:50 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ int		sqrt_up(int nb)
 	return (i);
 }
 
-int		tetras_count(t_tetra tetras[26])
+int		tetras_count(t_tetra (*tetras)[26])
 {
 	int i;
 
 	i = 0;
-	while (ft_isupper(tetras[i].id))
+	while ((*tetras)[i].id)
 		++i;
 	return (i);
 }
@@ -45,7 +45,7 @@ int		tetras_count(t_tetra tetras[26])
 ** tetraminos in the given array.
 */
 
-int		initial_square(t_tetra tetras[26])
+int		initial_square(t_tetra (*tetras)[26])
 {
 	return (ft_sqrt(tetras_count(tetras) * 4));
 }
@@ -54,14 +54,18 @@ int		initial_square(t_tetra tetras[26])
 ** Verify that the tetraminos we want to place is inside the square
 */
 
-int		is_inside_square(t_tetra tetras[26], int tetra, int xy[2], int side)
+int		is_inside_square(t_tetra tetras[26], int tetra, int xy[2], int *side)
 {
 	int i;
 
+	if (tetra < 0)
+		return (0);
 	i = -1;
 	while (++i < 4)
-		if (!(tetras[tetra].x[i] + xy[0] < side &&
-			  tetras[tetra].y[i] + xy[1] < side))
+		if (!(tetras[tetra].x[i] + xy[0] < *side &&
+			  tetras[tetra].x[i] + xy[0] >= 0 &&
+			  tetras[tetra].y[i] + xy[1] < *side &&
+			  tetras[tetra].y[i] + xy[1] >= 0))
 			return (0);
 	return (1);
 }
@@ -100,48 +104,55 @@ int		is_place_free(t_tetra tetras[26], int tetra, int xy[2])
 }
 
 /*
+** Try to place a tetrimino. Return 
+*/
+
+int		place_tetra(t_tetra (*tetras)[26], int tetra, int xy[2], int *side)
+{
+	while (xy[0] + xy[1] < (*side - 1) * (*side - 1))
+	{
+		if (is_inside_square(*tetras, tetra, xy, side) &&
+			is_place_free(*tetras, tetra, xy))
+		{
+			(*tetras)[tetra] = tetra_move((*tetras)[tetra], xy[0], xy[1]);
+			xy[0] = 0;
+			xy[1] = 0;
+			return (1);
+		}
+		// Decale le tetrimino pour essayer de le placer
+		if (xy[0] < *side - 1)
+		{
+			++(xy[0]);
+		}
+		else
+		{
+			xy[0] = 0;
+			++(xy[1]);
+		}
+	}
+	return (0);
+}
+
+/*
 ** Try to put all the tetraminos in a set sized square by backtracking.
 */
 
-int		is_large_enough(t_tetra (*tetras)[26], int tetra, int xy[2], int side)
+int		is_large_enough(t_tetra (*tetras)[26], int tetra, int xy[2], int *side)
 {
 	// Condition de reussite
-	if (tetra >= tetras_count(*tetras))
+	if (tetra < 0)
+		return (0);
+	if (tetra >= tetras_count(tetras))
 		return (1);
-	// Place le tetramino si possible
-	if (is_inside_square(*tetras, tetra, xy, side) &&
-		is_place_free(*tetras, tetra, xy))
-	{
-		(*tetras)[tetra] = tetra_move((*tetras)[tetra], xy[0], xy[1]);
-		xy[0] = 0;
-		xy[1] = 0;
+    // Place le tetramino si possible
+	if (place_tetra(tetras, tetra, xy, side))
 		return (is_large_enough(tetras, tetra + 1, xy, side));
-	}
-	// Decale le tetrimino pour essayer de le placer
-	if (xy[0] < side -1)
+	else
 	{
-		++(xy[0]);
-		/* tetra_normalize(tetras, tetra); */
-		return (is_large_enough(tetras, tetra, xy, side));
-	}
-	else if (xy[1] < side - 1)
-	{
-		xy[0] = 0;
-		++(xy[1]);
-		/* tetra_normalize(tetras, tetra); */
-		return (is_large_enough(tetras, tetra, xy, side));
-	}		
-	//tetra_normalize(tetras, tetra);
-		//ft_putstr("trolol");
-		//++(xy[0]
-	else if (xy[0] == side - 1 && 
-	        xy[1] == side - 1)
-    {
-		xy[0] = *(*tetras)[tetra - 1].x + 1;
-		xy[1] = *(*tetras)[tetra - 1].y;
+		xy[0] = (*tetras)[tetra - 1].x[0] + 1;
+		xy[1] = (*tetras)[tetra - 1].y[0];
 		tetra_normalize(tetras, tetra - 1);
-		//tetra_movex((*tetras)[tetra - 1], 1);
-		return (is_large_enough(tetras, tetra-1, xy, side));
+		return (is_large_enough(tetras, tetra - 1, xy, side));
 	}
 	return (0);
 }
@@ -156,16 +167,17 @@ int		resolve(t_tetra (*tetras)[26])
 	int		xy[2];
 	int		side;
 
-	side = initial_square(*tetras);
+	side = initial_square(tetras);
+	/* side = 4; */
 	while (side < 11)
 	{
 		tetra = 0;
 		xy[0] = 0;
 		xy[1] = 0;
-		if (is_large_enough(tetras, tetra, xy, side))
+		if (is_large_enough(tetras, tetra, xy, &side))
 			return (side);
-		//ft_putstr("----\n");
-		//display_result(*tetras, side);
+		/* ft_putstr("----\n"); */
+		/* display_result(*tetras, side); */
 		tetras_normalize(tetras);
 		++side;
 	}
