@@ -6,7 +6,7 @@
 /*   By: bzmuda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 09:40:52 by bzmuda            #+#    #+#             */
-/*   Updated: 2016/12/30 17:43:08 by bwaegene         ###   ########.fr       */
+/*   Updated: 2017/01/17 11:47:44 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,25 @@
 **  Detecting if the second '#' is next to the third '#'.
 */
 
-int	another_check(char *s, int deb, int fin)
+int	another_check(char *s, int start, int end)
 {
 	int h;
-	int eloi;
+	int dist;
 
-	eloi = 0;
+	dist = 0;
 	h = 0;
-	while (deb <= fin)
+	while (start <= end)
 	{
-		if (s[deb] == '#')
+		if (s[start] == '#')
 			h++;
-		if (h == 2 && s[deb] == '#')
+		if (h == 2 && s[start] == '#')
 		{
-			while (s[deb + 1 + eloi] != '#' && s[deb + eloi] != '\0')
-				eloi++;
-			if (eloi > 5)
+			while (s[start + 1 + dist] != '#' && s[start + dist] != '\0')
+				dist++;
+			if (dist > 5)
 				return (0);
 		}
-		deb++;
+		start++;
 	}
 	return (1);
 }
@@ -43,19 +43,19 @@ int	another_check(char *s, int deb, int fin)
 **  Returning the height of a tetrimino.
 */
 
-int	get_h(char *s, int deb)
+int	get_h(char *s, int start)
 {
 	int height;
 	int follow;
 
 	height = 0;
-	follow = 19 + deb;
-	while (deb <= follow)
+	follow = 19 + start;
+	while (start <= follow)
 	{
-		if (s[deb] == '#' || s[deb + 1] == '#' || s[deb + 2] == '#' ||\
-				s[deb + 3] == '#')
+		if (s[start] == '#' || s[start + 1] == '#' || s[start + 2] == '#' ||
+				s[start + 3] == '#')
 			height++;
-		deb += 5;
+		start += 5;
 	}
 	return (height);
 }
@@ -64,19 +64,19 @@ int	get_h(char *s, int deb)
 **  Returning the width of a tetrimino.
 */
 
-int	get_w(char *s, int deb)
+int	get_w(char *s, int start)
 {
 	int width;
 	int follow;
 
-	follow = 4 + deb;
+	follow = 4 + start;
 	width = 0;
-	while (deb <= follow)
+	while (start <= follow)
 	{
-		if (s[deb] == '#' || s[deb + 5] == '#' || s[deb + 10] == '#' ||\
-				s[deb + 15] == '#')
+		if (s[start] == '#' || s[start + 5] == '#' || s[start + 10] == '#' ||\
+				s[start + 15] == '#')
 			width++;
-		deb++;
+		start++;
 	}
 	return (width);
 }
@@ -85,16 +85,16 @@ int	get_w(char *s, int deb)
 **  Checks if the shape of each tetrimino is valid (5 right cases).
 */
 
-int	verif_body(char *s, int deb, int fin)
+int	verif_body(char *s, int start, int end)
 {
 	int h;
 	int w;
 
-	h = get_h(s, deb);
-	w = get_w(s, deb);
-	if (detective_alone(s, deb, fin) == 0)
+	h = get_h(s, start);
+	w = get_w(s, start);
+	if (detective_alone(s, start, end) == 0)
 		return (0);
-	if (another_check(s, deb, fin) == 0 || w == 0 || h == 0)
+	if (another_check(s, start, end) == 0 || w == 0 || h == 0)
 		return (0);
 	if (h == 4 && w == 1)
 		return (1);
@@ -116,25 +116,25 @@ int	verif_body(char *s, int deb, int fin)
 
 int	check_file(char *str)
 {
-	int deb;
-	int fin;
+	int start;
+	int end;
 
-	deb = 0;
-	fin = 19;
+	start = 0;
+	end = 19;
 	while (str)
 	{
-		if (collect_char(str, deb, fin) == 0 ||\
-			verif_line(str, deb, fin) == 0 ||\
-			verif_body(str, deb, fin) == 0 ||\
-			detective_love(str, deb, fin) == 0)
+		if (collect_char(str, start, end) == 0 ||\
+			verif_line(str, start, end) == 0 ||\
+			verif_body(str, start, end) == 0 ||\
+			detective_love(str, start, end) == 0)
 			return (0);
-		if (str[fin + 1] == '\n' && (str[fin + 2] == '.' ||\
-			str[fin + 2] == '#'))
+		if (str[end + 1] == '\n' && (str[end + 2] == '.' ||\
+			str[end + 2] == '#'))
 		{
-			fin += 21;
-			deb += 21;
+			end += 21;
+			start += 21;
 		}
-		else if (str[fin + 1] == '\0')
+		else if (str[end + 1] == '\0')
 			return (1);
 		else
 			return (0);
