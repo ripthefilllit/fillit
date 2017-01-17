@@ -16,20 +16,20 @@
 **  Verifying if each line of the block ends with \n and has 4 characters.
 */
 
-int	verif_line(char *s, int deb, int fin)
+int	verif_line(char *s, int start, int end)
 {
 	int y;
 
 	y = 0;
-	while (s[deb] != '\0' && deb <= fin)
+	while (s[start] != '\0' && start <= end)
 	{
-		if (s[deb] == '.' || s[deb] == '#')
+		if (s[start] == '.' || s[start] == '#')
 			y++;
 		if (y > 4)
 			return (0);
-		if (s[deb] == '\n' && y == 4)
+		if (s[start] == '\n' && y == 4)
 			y = 0;
-		deb++;
+		start++;
 	}
 	return (1);
 }
@@ -39,28 +39,28 @@ int	verif_line(char *s, int deb, int fin)
 ** A tetrimino is valid only if it contains 4#, 12. and 4\n.
 */
 
-int	collect_char(char *s, int deb, int fin)
+int	collect_char(char *s, int start, int end)
 {
 	int hashtag;
 	int point;
-	int baqueslache;
+	int jump;
 
 	hashtag = 0;
 	point = 0;
-	baqueslache = 0;
-	while (s[deb] != '\0' && deb <= fin)
+	jump = 0;
+	while (s[start] != '\0' && start <= end)
 	{
-		if (s[deb] == '#')
+		if (s[start] == '#')
 			hashtag++;
-		if (s[deb] == '.')
+		if (s[start] == '.')
 			point++;
-		if (s[deb] == '\n')
-			baqueslache++;
-		if (s[deb] != '#' && s[deb] != '.' && s[deb] != '\n')
+		if (s[start] == '\n')
+			jump++;
+		if (s[start] != '#' && s[start] != '.' && s[start] != '\n')
 			return (0);
-		deb++;
+		start++;
 	}
-	if (hashtag != 4 || point != 12 || baqueslache != 4)
+	if (hashtag != 4 || point != 12 || jump != 4)
 		return (0);
 	return (1);
 }
@@ -69,22 +69,22 @@ int	collect_char(char *s, int deb, int fin)
 **  Detecting if each '#' is as least next to 1 another '#'.
 */
 
-int	detective_alone(char *s, int deb, int fin)
+int	detective_alone(char *s, int start, int end)
 {
 	int valid_hashtag;
 
 	valid_hashtag = 0;
-	while (s[deb] != '\0' && deb <= fin)
+	while (s[start] != '\0' && start <= end)
 	{
-		if (s[deb] == '#')
+		if (s[start] == '#')
 		{
-			if (s[deb + 5] == '#' || s[deb - 5] == '#' ||\
-					(s[deb + 1] == '#') || s[deb - 1] == '#')
+			if (s[start + 5] == '#' || s[start - 5] == '#' ||\
+					(s[start + 1] == '#') || s[start - 1] == '#')
 				valid_hashtag++;
 			if (valid_hashtag == 4)
 				return (1);
 		}
-		deb++;
+		start++;
 	}
 	return (0);
 }
@@ -95,31 +95,31 @@ int	detective_alone(char *s, int deb, int fin)
 **  ... where only one tetrimino should touch 3 '#'
 */
 
-int	detective_love(char *s, int deb, int fin)
+int	detective_love(char *s, int start, int end)
 {
 	int hash;
-	int zen;
+	int english;
 	int cpt;
 
-	zen = 0;
+	english = 0;
 	hash = 0;
 	cpt = 0;
-	while (s[deb] != '\0' || deb <= fin)
+	while (s[start] != '\0' || start <= end)
 	{
-		if (s[deb] == '#')
+		if (s[start] == '#')
 		{
-			s[deb + 5] == '#' ? zen++ : zen;
-			s[deb - 5] == '#' ? zen++ : zen;
-			s[deb + 1] == '#' ? zen++ : zen;
-			s[deb - 1] == '#' ? zen++ : zen;
-			if (zen >= 2)
+			s[start + 5] == '#' ? english++ : english;
+			s[start - 5] == '#' ? english++ : english;
+			s[start + 1] == '#' ? english++ : english;
+			s[start - 1] == '#' ? english++ : english;
+			if (english >= 2)
 				cpt++;
 			hash++;
-			if ((hash == 4 && cpt >= 2) || (zen == 3))
+			if ((hash == 4 && cpt >= 2) || (english == 3))
 				return (1);
-			zen = 0;
+			english = 0;
 		}
-		deb++;
+		start++;
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: bzmuda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 09:44:17 by bzmuda            #+#    #+#             */
-/*   Updated: 2017/01/16 20:13:21 by bwaegene         ###   ########.fr       */
+/*   Updated: 2017/01/17 11:49:54 by bzmuda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ int					verif_body(char *s, int deb, int fin);
 int					get_w(char *s, int deb);
 int					get_h(char *s, int deb);
 int					another_check(char *s, int deb, int fin);
-int					detective_alone(char *s, int deb, int fin);
-int					collect_char(char *s, int deb, int fin);
-int					verif_line(char *s, int deb, int fin);
+int					detective_alone(char *s, int start, int end);
+int					collect_char(char *s, int start, int end);
+int					verif_line(char *s, int start, int end);
 char				**str_to_tblstr(char *str);
 int					nb_tetriminos(char *str);
 void				mark_tetriminos(char **tetriminos);
-int					detective_love(char *s, int deb, int fin);
+int					detective_love(char *s, int start, int end);
 
 int					error(void);
 int					usage(void);
